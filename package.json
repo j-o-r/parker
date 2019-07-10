@@ -1,8 +1,8 @@
 {
   "name": "parker-promise",
   "description": "Promises",
-  "version": "0.1.0",
-  "homepage": "https://github.com/jorritd/",
+  "version": "0.1.1",
+  "homepage": "https://github.com/j-o-r",
   "author": "Jorrit Duin <jorrit.duin@gmail.com> ",
   "scripts": {
     "test": "specs/test.js"
@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://git@bitbucket.org:duino/parker.git"
+    "url": "https://github.com/j-o-r/parker.git"
   },
   "main": "lib/Parker.js",
   "engines" : { "node" : ">=8.0" },
   "bugs": {
-    "url": "https://bitbucket.org/duino/parker/issues"
+    "url": "https://github.com/j-o-r/parker/issues"
   },
   "dependencies": {
   },
