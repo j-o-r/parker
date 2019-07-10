@@ -1,0 +1,38 @@
+{
+  "name": "parker-promise",
+  "description": "Promises",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jorritd/",
+  "author": "Jorrit Duin <jorrit.duin@gmail.com> ",
+  "scripts": {
+    "test": "specs/test.js"
+  },
+  "keywords": [
+    "server",
+    "events",
+    "promise"
+  ],
+   "directories" : {
+        "lib" : "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://git@bitbucket.org:duino/parker.git"
+  },
+  "main": "lib/Parker.js",
+  "engines" : { "node" : ">=8.0" },
+  "bugs": {
+    "url": "https://bitbucket.org/duino/parker/issues"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.0"
+  },
+  "licenses": [
+    {
+      "type": "GNU General Public License",
+      "url": "http://www.gnu.org/licenses"
+    }
+  ]
+}
