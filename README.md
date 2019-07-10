@@ -6,6 +6,14 @@
     npm install parker-promise --save
 ```
 
+### Test:
+```
+git clone https://github.com/j-o-r/parker.git
+cd parker
+npm install
+npm run test
+```
+
 ### Usage:
 
     var Parker = require('parker-promise');
