@@ -3,56 +3,65 @@
  * 'Who was first, A chicken or egg?' test
  * testing the parker-promise with a parker promise
  */
-const assert = require('assert');
+import assert from 'assert';
+import Parker from '../lib/Parker.js';
 const now = new Date().getTime();
-const Parker = require('../lib/Parker.js');
-var test = new Parker();
+const test = new Parker();
 
-test.do('Add multiple functions to "do"', (t) => {
-  const promise = new Parker();
-  let counter = 0;
+test.do('Add multiple functions to "do"',
+  /** @param {import('../lib/Parker.js').ParkerPromise} t */
+  (t) => {
+    const promise = new Parker();
+    let counter = 0;
 
-  promise.do('set a timeout amd 2 incements',
-    (p) => {
-      setTimeout(() => {
+    promise.do('set a timeout amd 2 incements',
+      /** @param {import('../lib/Parker.js').ParkerPromise} p */
+      (p) => {
+        setTimeout(() => {
+          counter++;
+          p.done();
+        }, 100);
+      },
+      /** @param {import('../lib/Parker.js').ParkerPromise} p */
+      (p) => {
         counter++;
         p.done();
-      }, 100);
-    },
-    (p) => {
-      counter++;
-      p.done();
-    },
-    (p) => {
-      setTimeout(() => {
-        counter++;
-        p.done();
-      }, 500);
-    }
-  )
-    .whenDone(() => {
-      assert.equal(counter, 3);
-      t.done();
-    })
-    .whenFail((e) => {
-      t.fail();
-    });
-});
+      },
+      /** @param {import('../lib/Parker.js').ParkerPromise} p */
+      (p) => {
+        setTimeout(() => {
+          counter++;
+          p.done();
+        }, 500);
+      }
+    )
+      .whenDone(() => {
+        assert.strictEqual(counter, 3);
+        t.done();
+      })
+      .whenFail((e) => {
+        t.fail();
+      });
+  });
 // without description
+/** @param {import('../lib/Parker.js').ParkerPromise} t */
 test.thenDo((t) => {
   const promise = new Parker();
   let counter = 0;
   promise.do(
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
         p.done();
       }, 100);
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       counter++;
       p.done();
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
@@ -61,29 +70,33 @@ test.thenDo((t) => {
     }
   )
     .whenDone(() => {
-      assert.equal(counter, 3);
+      assert.strictEqual(counter, 3);
       t.done();
     })
-    .whenFail((e) => {
+    .whenFail(() => {
       t.fail();
     });
 });
 // with timeout param
+/** @param {import('../lib/Parker.js').ParkerPromise} t */
 test.thenDo(1000, (t) => {
   const promise = new Parker();
   let counter = 0;
 
   promise.do('set a timeout amd 2 incements',
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
         p.done();
       }, 100);
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       counter++;
       p.done();
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
@@ -92,28 +105,33 @@ test.thenDo(1000, (t) => {
     }
   )
     .whenDone(() => {
-      assert.equal(counter, 3);
+      assert.strictEqual(counter, 3);
       t.done();
     })
     .whenFail((e) => {
+      console.log(e);
       t.fail();
     });
 });
 // expect to timeout
+/** @param {import('../lib/Parker.js').ParkerPromise} t */
 test.thenDo('expect to timeout', (t) => {
   const promise = new Parker();
   let counter = 0;
   promise.do('Do the timeout here', 500,
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
         p.done();
       }, 100);
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       counter++;
       p.done();
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
@@ -126,24 +144,29 @@ test.thenDo('expect to timeout', (t) => {
     })
     .whenFail((e) => {
       // This will fail in a timeout
-      assert.equal(counter, 2);
+      console.log(e);
+      assert.strictEqual(counter, 2);
       t.done();
     });
 });
+/** @param {import('../lib/Parker.js').ParkerPromise} t */
 test.thenDo('Test an "or" clause', (t) => {
   const promise = new Parker();
   let counter = 0;
   promise.do('First try',
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
         p.fail(); // this blovk fails
       }, 100);
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       counter++;
       p.done();
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
@@ -151,16 +174,19 @@ test.thenDo('Test an "or" clause', (t) => {
       }, 500);
     }
   ).orDo('Second try',
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
         p.done();
       }, 100);
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       counter++;
       p.done();
     },
+    /** @param {import('../lib/Parker.js').ParkerPromise} p */
     (p) => {
       setTimeout(() => {
         counter++;
@@ -169,14 +195,13 @@ test.thenDo('Test an "or" clause', (t) => {
     }
   )
     .whenDone(() => {
-      assert.equal(counter, 6);
+      assert.strictEqual(counter, 6);
       t.done();
     })
     .whenFail((e) => {
       t.fail();
     });
 });
-
 test.whenDone(() => {
   let duration = new Date().getTime() - now;
   console.log('ready in: '+ duration + ' ms') // eslint-disable-line

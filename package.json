@@ -1,11 +1,13 @@
 {
   "name": "parker-promise",
   "description": "Promises",
-  "version": "0.1.1",
+  "version": "1.0.o",
+  "type": "module",
   "homepage": "https://github.com/j-o-r",
   "author": "Jorrit Duin <jorrit.duin@gmail.com> ",
   "scripts": {
-    "test": "specs/test.js"
+    "test": "specs/test.js",
+    "types": "tsc lib/*.js --declaration --allowJs --emitDeclarationOnly"
   },
   "keywords": [
     "server",

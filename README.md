@@ -16,7 +16,7 @@ npm run test
 
 ### Usage:
 
-    var Parker = require('parker-promise');
+    import Parker from 'parker-promise';
     var promise = new Parker();
     promise.do('set a timeOut and 2 increments',
       // Can we pass something
