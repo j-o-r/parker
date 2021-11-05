@@ -1,7 +1,7 @@
 {
   "name": "parker-promise",
   "description": "Promises",
-  "version": "1.0.o",
+  "version": "1.0.1",
   "type": "module",
   "homepage": "https://github.com/j-o-r",
   "author": "Jorrit Duin <jorrit.duin@gmail.com> ",

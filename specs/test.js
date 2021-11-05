@@ -6,8 +6,7 @@
 import assert from 'assert';
 import Parker from '../lib/Parker.js';
 const now = new Date().getTime();
-const test = new Parker();
-
+const test = new Parker(true);
 test.do('Add multiple functions to "do"',
   /** @param {import('../lib/Parker.js').ParkerPromise} t */
   (t) => {

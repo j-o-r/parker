@@ -15,6 +15,14 @@ export type ParkerPromise = {
 };
 declare class Parker {
     /**
+     * @param {boolean} [trace] - log progress of promise executions
+     */
+    constructor(trace?: boolean);
+    /** @private */
+    private trace;
+    /** @private */
+    private pOptions;
+    /**
      * @param {...*} args
      */
     do(...args: any[]): any;
@@ -53,7 +61,6 @@ declare class Parker {
      * @private
      */
     private reset;
-    pOptions: {};
     /**
      * @private
      */
